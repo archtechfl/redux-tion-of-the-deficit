@@ -18,6 +18,13 @@ class ColorMixer extends React.Component {
     handleHexChange(event) {
         // Fires when the hex code is changed
         let hexCode = event.target.value;
+        var action = {
+            type: C.SET_HEX_CODE,
+            payload: {
+                "hexCode": hexCode
+            }
+        }
+        store.dispatch(action);
     }
 
     handleRGBchange(event) {
@@ -44,9 +51,15 @@ class ColorMixer extends React.Component {
     }
 
     formatHexNumber(number) {
+        // Convert the RGB number to a hex number
         let hex = "";
-        if (number < 10) {
-            hex = "0" + number;
+        // If number is less than 16, need to add appropriate formatting
+        if (number < 16) {
+            if (number < 10){
+                hex = "0" + number;
+            } else {
+                hex = "0" + number.toString(16);
+            }
         } else {
             hex = number.toString(16);
         }
@@ -59,7 +72,7 @@ class ColorMixer extends React.Component {
             red: this.props.red,
             green: this.props.green,
             blue: this.props.blue,
-            [name]: parseInt
+            [name]: parseInt(number)
         };
         let hexValues = {
             red: this.formatHexNumber(rgbValues.red),
@@ -79,6 +92,11 @@ class ColorMixer extends React.Component {
             blue
         } = this.props;
 
+        // Create the background color for the swatch
+        const swatch = {
+            "backgroundColor": `#${hexCode}`
+        }
+
         return (
             <div className="color-mixer-wrapper">
                 <h3>Color Controls</h3>
@@ -97,7 +115,7 @@ class ColorMixer extends React.Component {
                     </div>
                     <div className="hex-code">
                         <p>Hex code</p>
-                        <input type="text" name="hex" placeholder="FFFFFF" onChange={(e) => this.handleHexChange(e)} value={hexCode}/>
+                        <input type="text" name="hex" placeholder="ffffff" onChange={(e) => this.handleHexChange(e)} value={hexCode}/>
                     </div>
                 </div>
                 <div className="color-name">
@@ -105,7 +123,7 @@ class ColorMixer extends React.Component {
                 </div>
                 <div className="color-square">
                     <p>Color square</p>
-                    <div className="color-swatch"></div>
+                    <div className="color-swatch" style={swatch}></div>
                 </div>
             </div>
         );
