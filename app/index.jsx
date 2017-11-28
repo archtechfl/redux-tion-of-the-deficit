@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import Header from './header.jsx';
 import Footer from './footer.jsx';
+import ColorMixer from './colorMixer.jsx';
 
 class BaseStation extends React.Component {
 
@@ -17,6 +18,7 @@ class BaseStation extends React.Component {
         return (
             <div>
                 <Header greeting="Jeremy's Color Mixer"/>
+                <ColorMixer />
                 <Footer copyright="©2017 Jeremy Moore."/>
             </div>
         );
