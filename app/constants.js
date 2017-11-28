@@ -3,7 +3,8 @@ const constants = {
 	SET_COLOR_NAME: "SET_COLOR_NAME",
 	SET_RED: "red",
 	SET_GREEN: "red",
-	SET_BLUE: "red"
+	SET_BLUE: "red",
+	UPDATE_ALL_RGB: "UPDATE_ALL_RGB"
 }
 
 export default constants

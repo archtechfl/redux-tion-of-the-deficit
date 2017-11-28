@@ -23,6 +23,17 @@ class ColorMixer extends React.Component {
             payload: {
                 "hexCode": hexCode
             }
+        };
+        store.dispatch(action);
+        // Take the hex code and update the RGB values
+        let parsedHexCode = this.parseHexCode(hexCode);
+        var action = {
+            type: C.UPDATE_ALL_RGB,
+            payload: {
+                'red': parsedHexCode.red,
+                'green': parsedHexCode.green,
+                'blue': parsedHexCode.blue
+            }
         }
         store.dispatch(action);
     }
@@ -81,6 +92,18 @@ class ColorMixer extends React.Component {
         }
         let hexString = `${hexValues.red}${hexValues.green}${hexValues.blue}`;
         return hexString;
+    }
+
+    parseHexCode(code) {
+        // get the RGB numbers from the hex code
+        let red = parseInt(code.substring(0, 2), 16);
+        let green = parseInt(code.substring(2, 4), 16);
+        let blue = parseInt(code.substring(4, 6), 16);
+        return {
+            'red': red,
+            'green': green,
+            'blue': blue
+        }
     }
 
     render(){

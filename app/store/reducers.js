@@ -46,6 +46,14 @@ export const rgbCodes = function(state={"red": 255, "green": 255, "blue": 255}, 
 				...state,
 				blue: action.payload.rgbValue
 			};
+		case C.UPDATE_ALL_RGB:
+			console.log("Setting all RGB");
+			return {
+				...state,
+				red: action.payload.red,
+				green: action.payload.green,
+				blue: action.payload.blue
+			};
 		default:
 			return state;
 	}
