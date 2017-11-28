@@ -22,23 +22,52 @@ class ColorMixer extends React.Component {
 
     handleRGBchange(event) {
         // Fires when one of the RGB values is changed
-        let rgbNumber = event.target.value;
+        let rgbNumber = parseInt(event.target.value);
         let rgbName = event.target.name;
-        console.log(`
-            RGB color changed: ${rgbName}
-            RGB value: ${rgbNumber}
-        `);
+        // Update hex code
+        let getHexCode = this.convertRGBtoHex(rgbName, rgbNumber);
         var action = {
             type: C.SET_HEX_CODE,
             payload: {
-                "hexCode": "FF0000"
+                "hexCode": getHexCode
+            }
+        }
+        store.dispatch(action);
+        // Update RGB values
+        var action = {
+            type: rgbName,
+            payload: {
+                "rgbValue": rgbNumber
             }
         }
         store.dispatch(action);
     }
 
-    convertRGBtoHex() {
+    formatHexNumber(number) {
+        let hex = "";
+        if (number < 10) {
+            hex = "0" + number;
+        } else {
+            hex = number.toString(16);
+        }
+        return hex;
+    }
+
+    convertRGBtoHex(name, number) {
         // Converts the RGB combination to a hex code
+        let rgbValues = {
+            red: this.props.red,
+            green: this.props.green,
+            blue: this.props.blue,
+            [name]: parseInt
+        };
+        let hexValues = {
+            red: this.formatHexNumber(rgbValues.red),
+            green: this.formatHexNumber(rgbValues.green),
+            blue: this.formatHexNumber(rgbValues.blue)
+        }
+        let hexString = `${hexValues.red}${hexValues.green}${hexValues.blue}`;
+        return hexString;
     }
 
     render(){
@@ -56,19 +85,19 @@ class ColorMixer extends React.Component {
                 <div className="rgb-inputs">
                     <div className="red-input">
                         <p>Red</p>
-                        <input type="number" name="red" min="0" max="255" onChange={this.handleRGBchange} value={red}/>
+                        <input type="number" name="red" min="0" max="255" onChange={(e) => this.handleRGBchange(e)} value={red}/>
                     </div>
                     <div className="green-input">
                         <p>Green</p>
-                        <input type="number" name="green" min="0" max="255" onChange={this.handleRGBchange} value={green}/>
+                        <input type="number" name="green" min="0" max="255" onChange={(e) => this.handleRGBchange(e)} value={green}/>
                     </div>
                     <div className="blue-input">
                         <p>Blue</p>
-                        <input type="number" name="blue" min="0" max="255" onChange={this.handleRGBchange} value={blue}/>
+                        <input type="number" name="blue" min="0" max="255" onChange={(e) => this.handleRGBchange(e)} value={blue}/>
                     </div>
                     <div className="hex-code">
                         <p>Hex code</p>
-                        <input type="text" name="hex" placeholder="FFFFFF" onChange={this.handleHexChange} value={hexCode}/>
+                        <input type="text" name="hex" placeholder="FFFFFF" onChange={(e) => this.handleHexChange(e)} value={hexCode}/>
                     </div>
                 </div>
                 <div className="color-name">
