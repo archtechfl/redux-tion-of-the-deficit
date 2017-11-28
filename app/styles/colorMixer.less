@@ -2,5 +2,31 @@
 
 .color-mixer-wrapper {
 	font-family: Arial, sans-serif;
-	padding: 1% 5%;
+    padding: 1% 5%;
+
+    > div {
+        display: block;
+    }
+
+    .rgb-inputs {
+        height: 7em;
+        > div {
+            float: left;
+            margin-right: 2em;
+        }
+        input {
+            float: left;
+        }
+    }
+
+    .color-name {
+        margin-bottom: 2em;
+    }
+
+    .color-swatch {
+        height: 200px;
+        width: 200px;
+        border: 1px solid black;
+    }
+
 }
