@@ -112,7 +112,8 @@ class ColorMixer extends React.Component {
             hexCode,
             red,
             green,
-            blue
+            blue,
+            colorName
         } = this.props;
 
         // Create the background color for the swatch
@@ -142,7 +143,7 @@ class ColorMixer extends React.Component {
                     </div>
                 </div>
                 <div className="color-name">
-                    <p>Color name: <span className="color-name-value"></span></p>
+                    <p>Color name: <span className="color-name-value">{colorName}</span></p>
                 </div>
                 <div className="color-square">
                     <p>Color square</p>
@@ -159,7 +160,8 @@ const mapStateToProps = (state) => {
         hexCode: state.hexCode,
         red: state.rgbCodes.red,
         green: state.rgbCodes.green,
-        blue: state.rgbCodes.blue
+        blue: state.rgbCodes.blue,
+        colorName: state.colorName
     }
 }
 

@@ -1,7 +1,7 @@
 import C from '../constants';
 import { combineReducers } from 'redux';
 
-export const hexCode = function(state="ffffff", action){
+export const hexCode = function(state="000000", action){
 
 	switch (action.type) {
 		case C.SET_HEX_CODE:
@@ -13,7 +13,7 @@ export const hexCode = function(state="ffffff", action){
 
 }
 
-export const colorName = function(state="white", action){
+export const colorName = function(state="Black", action){
 
 	switch (action.type) {
 		case C.SET_COLOR_NAME:
@@ -25,7 +25,7 @@ export const colorName = function(state="white", action){
 
 }
 
-export const rgbCodes = function(state={"red": 255, "green": 255, "blue": 255}, action){
+export const rgbCodes = function(state={"red": 0, "green": 0, "blue": 0}, action){
 
 	switch (action.type) {
 		case C.SET_RED:
