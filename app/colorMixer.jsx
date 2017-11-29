@@ -3,6 +3,7 @@ import React from 'react';
 import C from './constants';
 
 import appReducer from './store/reducers';
+import { updateHex, updateRGB, updateAllRGB } from './actions';
 import { Provider, connect } from 'react-redux';
 
 class ColorMixer extends React.Component {
@@ -18,47 +19,30 @@ class ColorMixer extends React.Component {
     handleHexChange(event) {
         // Fires when the hex code is changed
         let hexCode = event.target.value;
-        var action = {
-            type: C.SET_HEX_CODE,
-            payload: {
-                "hexCode": hexCode
-            }
-        };
-        store.dispatch(action);
+        // Call action for update hex code
+        store.dispatch(
+            updateHex(hexCode)
+        );
         // Take the hex code and update the RGB values
         let parsedHexCode = this.parseHexCode(hexCode);
-        var action = {
-            type: C.UPDATE_ALL_RGB,
-            payload: {
-                'red': parsedHexCode.red,
-                'green': parsedHexCode.green,
-                'blue': parsedHexCode.blue
-            }
-        }
-        store.dispatch(action);
+        store.dispatch(
+            updateAllRGB(parsedHexCode)
+        );
     }
 
     handleRGBchange(event) {
         // Fires when one of the RGB values is changed
         let rgbNumber = parseInt(event.target.value);
         let rgbName = event.target.name;
+        // Update RGB values
+        store.dispatch(
+            updateRGB(rgbName, rgbNumber)
+        );
         // Update hex code
         let getHexCode = this.convertRGBtoHex(rgbName, rgbNumber);
-        var action = {
-            type: C.SET_HEX_CODE,
-            payload: {
-                "hexCode": getHexCode
-            }
-        }
-        store.dispatch(action);
-        // Update RGB values
-        var action = {
-            type: rgbName,
-            payload: {
-                "rgbValue": rgbNumber
-            }
-        }
-        store.dispatch(action);
+        store.dispatch(
+            updateHex(getHexCode)
+        );
     }
 
     formatHexNumber(number) {
@@ -99,6 +83,17 @@ class ColorMixer extends React.Component {
         let red = parseInt(code.substring(0, 2), 16);
         let green = parseInt(code.substring(2, 4), 16);
         let blue = parseInt(code.substring(4, 6), 16);
+        // Sanity logic in the event that the hex code string is not complete
+        if (isNaN(green)){
+            green = 0;
+        };
+        if (isNaN(red)){
+            red = 0;
+        };
+        if (isNaN(blue)){
+            blue = 0;
+        };
+        // Returns the RGB value dictionary
         return {
             'red': red,
             'green': green,

@@ -5,7 +5,6 @@ export const hexCode = function(state="000000", action){
 
 	switch (action.type) {
 		case C.SET_HEX_CODE:
-			console.log("Setting hex code");
 			return action.payload.hexCode;
 		default:
 			return state;
@@ -17,7 +16,6 @@ export const colorName = function(state="Black", action){
 
 	switch (action.type) {
 		case C.SET_COLOR_NAME:
-			console.log("Setting color name");
 			return action.payload.colorName;
 		default:
 			return state;
@@ -29,25 +27,22 @@ export const rgbCodes = function(state={"red": 0, "green": 0, "blue": 0}, action
 
 	switch (action.type) {
 		case C.SET_RED:
-			console.log("Setting red");
 			return {
 				...state,
 				red: action.payload.rgbValue
 			};
 		case C.SET_GREEN:
-			console.log("Setting green");
 			return {
 				...state,
 				green: action.payload.rgbValue
 			};
 		case C.SET_BLUE:
-			console.log("Setting blue");
+			console.log(`Update blue: ${action.payload.rgbValue}`);
 			return {
 				...state,
 				blue: action.payload.rgbValue
 			};
 		case C.UPDATE_ALL_RGB:
-			console.log("Setting all RGB");
 			return {
 				...state,
 				red: action.payload.red,
