@@ -11,7 +11,7 @@ export function updateHex(hexCode) {
 };
 
 export function updateAllRGB(parsedHexCode) {
-    // Update the hex code
+    // Update all the RGB values
     return {
         type: C.UPDATE_ALL_RGB,
         payload: {
@@ -23,12 +23,36 @@ export function updateAllRGB(parsedHexCode) {
 };
 
 export function updateRGB(rgbName, rgbNumber) {
-    // Update the hex code
-    console.log("update RGB action");
+    // Update the RGB color value
     return {
         type: rgbName,
         payload: {
             "rgbValue": rgbNumber
         }
+    };
+};
+
+export function updateColorName(name) {
+    // Update the RGB color value
+    return {
+        type: C.SET_COLOR_NAME,
+        payload: {
+            "colorName": name
+        }
+    };
+};
+
+export function getColorName(hex) {
+    let colorURL = `http://www.thecolorapi.com/id?hex=${hex}`;
+    // Get the name of the color
+    return (dispatch) => {
+        fetch(colorURL)
+            .then(response => response.json())
+            .then(response => {
+                let colorName = response.name.value;
+                dispatch(updateColorName(colorName));
+                return response;
+            })
+            .catch((e) => console.log(e));
     };
 };

@@ -3,7 +3,7 @@ import React from 'react';
 import C from './constants';
 
 import appReducer from './store/reducers';
-import { updateHex, updateRGB, updateAllRGB } from './actions';
+import { updateHex, updateRGB, updateAllRGB, getColorName } from './actions';
 import { Provider, connect } from 'react-redux';
 
 class ColorMixer extends React.Component {
@@ -28,6 +28,8 @@ class ColorMixer extends React.Component {
         store.dispatch(
             updateAllRGB(parsedHexCode)
         );
+        // Update the color name
+        this.props.fetchColorName(hexCode);
     }
 
     handleRGBchange(event) {
@@ -56,6 +58,8 @@ class ColorMixer extends React.Component {
         store.dispatch(
             updateHex(getHexCode)
         );
+        // Update the color name
+        this.props.fetchColorName(getHexCode);
     }
 
     formatHexNumber(number) {
@@ -173,4 +177,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(ColorMixer)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchColorName: (hex) => dispatch(getColorName(hex))
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ColorMixer)
