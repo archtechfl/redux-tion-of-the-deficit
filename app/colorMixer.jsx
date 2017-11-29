@@ -35,6 +35,19 @@ class ColorMixer extends React.Component {
         let rgbNumber = parseInt(event.target.value);
         let rgbName = event.target.name;
         // Update RGB values
+        // Set RGB number to zero is it is NaN (value is deleted)
+        if (isNaN(rgbNumber)){
+            rgbNumber = 0;
+        } else {
+            // Handle manual input causing the RGB number value to go out of bounds (abovr 255 or below 0)
+            if (rgbNumber > 255 || rgbNumber < 0) {
+                if (rgbNumber > 255) {
+                    rgbNumber = 255;
+                } else {
+                    rgbNumber = 0;
+                }
+            }
+        }
         store.dispatch(
             updateRGB(rgbName, rgbNumber)
         );
@@ -141,7 +154,7 @@ class ColorMixer extends React.Component {
                     <p>Color name: <span className="color-name-value">{colorName}</span></p>
                 </div>
                 <div className="color-square">
-                    <p>Color square</p>
+                    <p>Color swatch</p>
                     <div className="color-swatch" style={swatch}></div>
                 </div>
             </div>
