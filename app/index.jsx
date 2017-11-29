@@ -4,6 +4,18 @@ import Header from './header.jsx';
 import Footer from './footer.jsx';
 import ColorMixer from './colorMixer.jsx';
 
+import { createStore, applyMiddleware } from 'redux';
+import appReducer from './store/reducers';
+import { Provider, connect } from 'react-redux';
+import thunk from 'redux-thunk';
+
+const store = createStore(
+    appReducer,
+    applyMiddleware(thunk)
+);
+window.store = store;
+console.log('initial state', store.getState());
+
 class BaseStation extends React.Component {
 
     constructor(props){
@@ -18,7 +30,9 @@ class BaseStation extends React.Component {
         return (
             <div>
                 <Header greeting="Jeremy's Color Mixer"/>
-                <ColorMixer />
+                <Provider store={store}>
+                    <ColorMixer />
+                </Provider>
                 <Footer copyright="©2017 Jeremy Moore."/>
             </div>
         );

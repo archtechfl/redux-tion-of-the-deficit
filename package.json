@@ -5,7 +5,9 @@
   "description": "A progressive demonstration of basic React JS capabilities",
   "main": "index.jsx",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "dev": "webpack-dev-server"
   },
   "keywords": [
     "ReactJS",
@@ -27,6 +29,9 @@
     "gulp-babel": "^6.1.2",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
+    "react-redux": "^5.0.3",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2"
