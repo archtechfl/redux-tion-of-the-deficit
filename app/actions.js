@@ -33,7 +33,7 @@ export function updateRGB(rgbName, rgbNumber) {
 };
 
 export function updateColorName(name) {
-    // Update the RGB color value
+    // Update the color name based on the API response
     return {
         type: C.SET_COLOR_NAME,
         payload: {

@@ -37,7 +37,6 @@ export const rgbCodes = function(state={"red": 0, "green": 0, "blue": 0}, action
 				green: action.payload.rgbValue
 			};
 		case C.SET_BLUE:
-			console.log(`Update blue: ${action.payload.rgbValue}`);
 			return {
 				...state,
 				blue: action.payload.rgbValue
