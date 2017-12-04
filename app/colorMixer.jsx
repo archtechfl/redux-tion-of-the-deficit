@@ -73,6 +73,8 @@ class ColorMixer extends React.Component {
 
     convertRGBtoHex(name, number) {
         // Converts the RGB combination to a hex code
+        // If user deletes the RGB value in the interface, assume "0" for logic but store empty string
+        // - If zero is then stored in the state, field will never be blank, bad UX
         if (number === null || number === undefined || number === "") {
             number = 0;
         }
