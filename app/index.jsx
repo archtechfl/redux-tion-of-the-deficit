@@ -13,7 +13,7 @@ const store = createStore(
     appReducer,
     applyMiddleware(thunk)
 );
-window.store = store;
+
 console.log('initial state', store.getState());
 
 class BaseStation extends React.Component {

@@ -1,4 +1,5 @@
 import C from './constants';
+import { hexCode } from './store/reducers';
 
 export function updateHex(hexCode) {
     // Update the hex code
@@ -49,6 +50,7 @@ export function getColorName(hex) {
         fetch(colorURL)
             .then(response => response.json())
             .then(response => {
+                // Get the actual color name from the API response
                 let colorName = response.name.value;
                 dispatch(updateColorName(colorName));
                 return response;
@@ -56,3 +58,24 @@ export function getColorName(hex) {
             .catch((e) => console.log(e));
     };
 };
+
+export function triggerUpdateRGB(rgbName, rgbNumber) {
+    // Dispatch the update RGB action
+    return (dispatch) => {
+        dispatch(updateRGB(rgbName, rgbNumber));
+    }
+}
+
+export function triggerUpdateAllRGB(parsedHexCode) {
+    // Dispatch the update all RGB action
+    return (dispatch) => {
+        dispatch(updateAllRGB(parsedHexCode));
+    }
+}
+
+export function triggerUpdateHex(hexCode) {
+    // Dispatch the update HEX action
+    return (dispatch) => {
+        dispatch(updateHex(hexCode));
+    }
+}
