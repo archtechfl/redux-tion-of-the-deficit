@@ -6,7 +6,7 @@ import appReducer from './store/reducers';
 import { triggerUpdateHex, triggerUpdateRGB, triggerUpdateAllRGB, getColorName } from './actions';
 import { Provider, connect } from 'react-redux';
 
-import { formatHexNumber, parseHexCode } from './utils';
+import { formatHexNumber, parseHexCode, generateHexString } from './utils';
 
 class ColorMixer extends React.Component {
 
@@ -26,8 +26,13 @@ class ColorMixer extends React.Component {
         // Take the hex code and update the RGB values
         let parsedHexCode = parseHexCode(hexCode);
         this.props.triggerUpdateAllRGB(parsedHexCode);
+        // Get the complete hex code
+        // TODO: figure out what to do with the fleshed out hex code in regards to state
+        // - Right now, if a hex code is incomplete, flesh it out in the app but do not update the state
+        // - Simply use it to get the correct color name for now
+        let completeHexCode = generateHexString(parsedHexCode);
         // Update the color name
-        this.props.fetchColorName(hexCode);
+        this.props.fetchColorName(completeHexCode);
     }
 
     handleRGBchange(event) {
@@ -70,13 +75,7 @@ class ColorMixer extends React.Component {
             blue: this.props.blue,
             [name]: parseInt(number)
         };
-        let hexValues = {
-            red: formatHexNumber(rgbValues.red),
-            green: formatHexNumber(rgbValues.green),
-            blue: formatHexNumber(rgbValues.blue)
-        }
-        let hexString = `${hexValues.red}${hexValues.green}${hexValues.blue}`;
-        return hexString;
+        return generateHexString(rgbValues);
     }
 
     render(){

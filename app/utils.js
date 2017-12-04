@@ -59,4 +59,15 @@ function parseHexCode(code) {
     }
 }
 
-export { convertRGBtoHex, formatHexNumber, parseHexCode };
+function generateHexString(rgb) {
+    // Purpose: take a dictionary of RGB values and convert to hex string
+    let hexValues = {
+        red: formatHexNumber(rgb.red),
+        green: formatHexNumber(rgb.green),
+        blue: formatHexNumber(rgb.blue)
+    }
+    let hexString = `${hexValues.red}${hexValues.green}${hexValues.blue}`;
+    return hexString;
+}
+
+export { convertRGBtoHex, formatHexNumber, parseHexCode, generateHexString };
