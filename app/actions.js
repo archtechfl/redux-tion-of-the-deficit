@@ -1,4 +1,5 @@
 import C from './constants';
+import { hexCode } from './store/reducers';
 
 export function updateHex(hexCode) {
     // Update the hex code
@@ -56,3 +57,21 @@ export function getColorName(hex) {
             .catch((e) => console.log(e));
     };
 };
+
+export function triggerUpdateRGB(rgbName, rgbNumber) {
+    return (dispatch) => {
+        dispatch(updateRGB(rgbName, rgbNumber));
+    }
+}
+
+export function triggerUpdateAllRGB(parsedHexCode) {
+    return (dispatch) => {
+        dispatch(updateAllRGB(parsedHexCode));
+    }
+}
+
+export function triggerUpdateHex(hexCode) {
+    return (dispatch) => {
+        dispatch(updateHex(hexCode));
+    }
+}
