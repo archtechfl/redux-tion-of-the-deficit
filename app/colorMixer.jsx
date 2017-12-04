@@ -6,6 +6,8 @@ import appReducer from './store/reducers';
 import { triggerUpdateHex, triggerUpdateRGB, triggerUpdateAllRGB, getColorName } from './actions';
 import { Provider, connect } from 'react-redux';
 
+import { formatHexNumber, parseHexCode } from './utils';
+
 class ColorMixer extends React.Component {
 
     constructor(props){
@@ -22,7 +24,7 @@ class ColorMixer extends React.Component {
         // Call action for update hex code
         this.props.triggerUpdateHex(hexCode);
         // Take the hex code and update the RGB values
-        let parsedHexCode = this.parseHexCode(hexCode);
+        let parsedHexCode = parseHexCode(hexCode);
         this.props.triggerUpdateAllRGB(parsedHexCode);
         // Update the color name
         this.props.fetchColorName(hexCode);
@@ -55,22 +57,6 @@ class ColorMixer extends React.Component {
         this.props.fetchColorName(getHexCode);
     }
 
-    formatHexNumber(number) {
-        // Convert the RGB number to a hex number
-        let hex = "";
-        // If number is less than 16, need to add appropriate formatting
-        if (number < 16) {
-            if (number < 10){
-                hex = "0" + number;
-            } else {
-                hex = "0" + number.toString(16);
-            }
-        } else {
-            hex = number.toString(16);
-        }
-        return hex;
-    }
-
     convertRGBtoHex(name, number) {
         // Converts the RGB combination to a hex code
         // If user deletes the RGB value in the interface, assume "0" for logic but store empty string
@@ -85,35 +71,12 @@ class ColorMixer extends React.Component {
             [name]: parseInt(number)
         };
         let hexValues = {
-            red: this.formatHexNumber(rgbValues.red),
-            green: this.formatHexNumber(rgbValues.green),
-            blue: this.formatHexNumber(rgbValues.blue)
+            red: formatHexNumber(rgbValues.red),
+            green: formatHexNumber(rgbValues.green),
+            blue: formatHexNumber(rgbValues.blue)
         }
         let hexString = `${hexValues.red}${hexValues.green}${hexValues.blue}`;
         return hexString;
-    }
-
-    parseHexCode(code) {
-        // get the RGB numbers from the hex code
-        let red = parseInt(code.substring(0, 2), 16);
-        let green = parseInt(code.substring(2, 4), 16);
-        let blue = parseInt(code.substring(4, 6), 16);
-        // Sanity logic in the event that the hex code string is not complete
-        if (isNaN(green)){
-            green = 0;
-        };
-        if (isNaN(red)){
-            red = 0;
-        };
-        if (isNaN(blue)){
-            blue = 0;
-        };
-        // Returns the RGB value dictionary
-        return {
-            'red': red,
-            'green': green,
-            'blue': blue
-        }
     }
 
     render(){
