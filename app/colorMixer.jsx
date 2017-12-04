@@ -91,7 +91,7 @@ class ColorMixer extends React.Component {
 
         // Create the background color for the swatch
         const swatch = {
-            "backgroundColor": `#${hexCode}`
+            "backgroundColor": `rgb(${red},${green},${blue})`
         }
 
         return (
