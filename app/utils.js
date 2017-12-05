@@ -67,9 +67,9 @@ function validate_rgb_number(rgbNumber) {
     return rgbNumber;
 }
 
-export {
-    formatHexNumber,
-    parseHexCode,
-    generateHexString,
-    validate_rgb_number
- };
+ module.exports = {
+    formatHexNumber: formatHexNumber,
+    parseHexCode: parseHexCode,
+    generateHexString: generateHexString,
+    validate_rgb_number: validate_rgb_number
+}
