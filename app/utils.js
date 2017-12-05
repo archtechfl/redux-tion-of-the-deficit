@@ -67,9 +67,28 @@ function validate_rgb_number(rgbNumber) {
     return rgbNumber;
 }
 
+function validateHexCode(hexCode){
+    // Examine the hex code and correct any values that are out of bounds high (i.e. anything above 'f' should be brought down to 'f')
+    let hexValues = hexCode.split("");
+    var correctedHexValues = hexValues.map(function(value) {
+        // Find values above f
+        var regEx = /[0-9]|[a-f]/g;
+        var outOfBounds = value.search(regEx);
+        var validatedValue = value;
+        if (outOfBounds < 0) {
+            // Character is not a valid hex, convert to f to bring character into the valid range
+            validatedValue = "f";
+        }
+        return validatedValue;
+    });
+    // Take the corrected array and turn it back into a string for processing
+    return correctedHexValues.join("");
+}
+
  module.exports = {
     formatHexNumber: formatHexNumber,
     parseHexCode: parseHexCode,
     generateHexString: generateHexString,
-    validate_rgb_number: validate_rgb_number
+    validate_rgb_number: validate_rgb_number,
+    validateHexCode: validateHexCode
 }

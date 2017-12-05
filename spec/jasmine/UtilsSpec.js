@@ -3,7 +3,8 @@ var utils = require('../../app/utils.js');
 var formatHexNumber = utils.formatHexNumber,
     parseHexCode = utils.parseHexCode,
     generateHexString = utils.generateHexString,
-    validate_rgb_number = utils.validate_rgb_number;
+    validate_rgb_number = utils.validate_rgb_number,
+    validateHexCode = utils.validateHexCode;
 
 describe("Utils", function() {
 
@@ -109,7 +110,7 @@ describe("Utils", function() {
       expect(rgb).toEqual(rgbExpect);
     });
 
-    it("Hex 'gggggg' should return RGB of (255,255,255)", function() {
+    it("Hex 'gggggg' should return RGB of (255,255,255) after correction", function() {
       var hex = "gggggg";
       var rgb = parseHexCode(hex);
       var rgbExpect = {
@@ -118,6 +119,33 @@ describe("Utils", function() {
         blue: 255
       }
       expect(rgb).toEqual(rgbExpect);
+    });
+
+    it("Hex 'ggff00' should return RGB of (255,255,0) after correction", function() {
+      var hex = "ggff00";
+      var rgb = parseHexCode(hex);
+      var rgbExpect = {
+        red: 255,
+        green: 255,
+        blue: 0
+      }
+      expect(rgb).toEqual(rgbExpect);
+    });
+
+  });
+
+  describe("Hex validation", function() {
+
+    it("Hex 'gg0000' should correct to ff0000", function() {
+      var hex = "gg0000";
+      var validatedHex = validateHexCode(hex);
+      expect(validatedHex).toEqual("ff0000");
+    });
+
+    it("Hex 'gggggg' should correct to ffffff", function() {
+      var hex = "gggggg";
+      var validatedHex = validateHexCode(hex);
+      expect(validatedHex).toEqual("ffffff");
     });
 
   });
