@@ -216,6 +216,12 @@ describe("Utils", function() {
       expect(hex).toEqual("ff");
     });
 
+    it("Expect 10 to be encoded as 0a in hex", function() {
+      var number = 10;
+      var hex = formatHexNumber(number);
+      expect(hex).toEqual("0a");
+    });
+
   });
 
 });
