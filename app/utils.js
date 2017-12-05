@@ -48,4 +48,28 @@ function generateHexString(rgb) {
     return hexString;
 }
 
-export { formatHexNumber, parseHexCode, generateHexString };
+function validate_rgb_number(rgbNumber) {
+    // If the RGB number is out of range, bring it into range 0-255
+    if (isNaN(rgbNumber)){
+        // Set RGB number to empty string if it is deleted
+        // Setting RGB value to 0 if it is deleted in the UI has undesired effect, makes value incapable of being deleted (only overwritten), bad UX
+        rgbNumber = "";
+    } else {
+        // Handle manual input causing the RGB number value to go out of bounds (abovr 255 or below 0)
+        if (rgbNumber > 255 || rgbNumber < 0) {
+            if (rgbNumber > 255) {
+                rgbNumber = 255;
+            } else {
+                rgbNumber = 0;
+            }
+        }
+    }
+    return rgbNumber;
+}
+
+export {
+    formatHexNumber,
+    parseHexCode,
+    generateHexString,
+    validate_rgb_number
+ };

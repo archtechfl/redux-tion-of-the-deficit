@@ -6,7 +6,7 @@ import appReducer from './store/reducers';
 import { triggerUpdateHex, triggerUpdateRGB, triggerUpdateAllRGB, getColorName } from './actions';
 import { Provider, connect } from 'react-redux';
 
-import { formatHexNumber, parseHexCode, generateHexString } from './utils';
+import { formatHexNumber, parseHexCode, generateHexString, validate_rgb_number } from './utils';
 
 class ColorMixer extends React.Component {
 
@@ -37,23 +37,12 @@ class ColorMixer extends React.Component {
         let rgbNumber = parseInt(event.target.value);
         let rgbName = event.target.name;
         // Update RGB values
-        // Set RGB number to zero is it is NaN (value is deleted)
-        if (isNaN(rgbNumber)){
-            rgbNumber = "";
-        } else {
-            // Handle manual input causing the RGB number value to go out of bounds (abovr 255 or below 0)
-            if (rgbNumber > 255 || rgbNumber < 0) {
-                if (rgbNumber > 255) {
-                    rgbNumber = 255;
-                } else {
-                    rgbNumber = 0;
-                }
-            }
-        }
+        // Validate the RGB number value (if out of range)
+        let validatedNumber = validate_rgb_number(rgbNumber);
         // Update the RGB value
-        this.props.triggerUpdateRGB(rgbName, rgbNumber);
+        this.props.triggerUpdateRGB(rgbName, validatedNumber);
         // Update hex code
-        let getHexCode = this.convertRGBtoHex(rgbName, rgbNumber);
+        let getHexCode = this.convertRGBtoHex(rgbName, validatedNumber);
         this.props.triggerUpdateHex(getHexCode);
         // Update the color name
         this.props.fetchColorName(getHexCode);
@@ -72,6 +61,7 @@ class ColorMixer extends React.Component {
             blue: this.props.blue,
             [name]: parseInt(number)
         };
+        // Pass the RGB dict to the util function for deriving a hex string
         return generateHexString(rgbValues);
     }
 
