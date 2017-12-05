@@ -110,26 +110,30 @@ describe("Utils", function() {
       expect(rgb).toEqual(rgbExpect);
     });
 
-    it("Hex 'gggggg' should return RGB of (255,255,255) after correction", function() {
+    it("Hex 'gggggg' should return RGB of (255,255,255) after validation", function() {
       var hex = "gggggg";
-      var rgb = parseHexCode(hex);
+      var validatedHex = validateHexCode(hex);
+      var rgb = parseHexCode(validatedHex);
       var rgbExpect = {
         red: 255,
         green: 255,
         blue: 255
       }
       expect(rgb).toEqual(rgbExpect);
+      expect(validatedHex).toEqual("ffffff");
     });
 
-    it("Hex 'ggff00' should return RGB of (255,255,0) after correction", function() {
+    it("Hex 'ggff00' should return RGB of (255,255,0) after validation", function() {
       var hex = "ggff00";
-      var rgb = parseHexCode(hex);
+      var validatedHex = validateHexCode(hex);
+      var rgb = parseHexCode(validatedHex);
       var rgbExpect = {
         red: 255,
         green: 255,
         blue: 0
       }
       expect(rgb).toEqual(rgbExpect);
+      expect(validatedHex).toEqual("ffff00");
     });
 
   });
@@ -146,6 +150,36 @@ describe("Utils", function() {
       var hex = "gggggg";
       var validatedHex = validateHexCode(hex);
       expect(validatedHex).toEqual("ffffff");
+    });
+
+    it("Hex 'ffffff' should return intact", function() {
+      var hex = "ffffff";
+      var validatedHex = validateHexCode(hex);
+      expect(validatedHex).toEqual("ffffff");
+    });
+
+    it("Hex '000000' should return intact", function() {
+      var hex = "000000";
+      var validatedHex = validateHexCode(hex);
+      expect(validatedHex).toEqual("000000");
+    });
+
+    it("Hex 'ff0000' should return intact", function() {
+      var hex = "ff0000";
+      var validatedHex = validateHexCode(hex);
+      expect(validatedHex).toEqual("ff0000");
+    });
+
+    it("Hex '00ff00' should return intact", function() {
+      var hex = "00ff00";
+      var validatedHex = validateHexCode(hex);
+      expect(validatedHex).toEqual("00ff00");
+    });
+
+    it("Hex '0000ff' should return intact", function() {
+      var hex = "0000ff";
+      var validatedHex = validateHexCode(hex);
+      expect(validatedHex).toEqual("0000ff");
     });
 
   });

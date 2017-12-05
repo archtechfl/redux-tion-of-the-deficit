@@ -27,16 +27,18 @@ class ColorMixer extends React.Component {
     handleHexChange(event) {
         // Fires when the hex code is changed
         let hexCode = event.target.value;
-        // Validate hex code
+        // Validate hex code to make sure it is in the proper range
         let validatedHexCode = validateHexCode(hexCode);
-        // Call action for update hex code
+        // Call action for update hex code once it's validated
         this.props.triggerUpdateHex(validatedHexCode);
         // Take the hex code and update the RGB values
-        let parsedHexCode = parseHexCode(hexCode);
+        let parsedHexCode = parseHexCode(validatedHexCode);
+        // Pass the parsed hex code with RGB dict to the update RGB action
         this.props.triggerUpdateAllRGB(parsedHexCode);
-        // Get the complete hex code
+        // Get the complete hex code if it's incomplete
         let completeHexCode = generateHexString(parsedHexCode);
-        // Update the color name
+        // Update the color name with a complete valid hex code
+        // API should be passed complete hex codes, i.e. 'ff0000' instead of simply 'ff'
         this.props.fetchColorName(completeHexCode);
     }
 
