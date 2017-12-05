@@ -50,7 +50,7 @@ function generateHexString(rgb) {
 
 function validate_rgb_number(rgbNumber) {
     // If the RGB number is out of range, bring it into range 0-255
-    if (isNaN(rgbNumber)){
+    if (isNaN(rgbNumber) || rgbNumber === null || rgbNumber === ""){
         // Set RGB number to empty string if it is deleted
         // Setting RGB value to 0 if it is deleted in the UI has undesired effect, makes value incapable of being deleted (only overwritten), bad UX
         rgbNumber = "";

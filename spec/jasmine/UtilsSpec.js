@@ -224,4 +224,38 @@ describe("Utils", function() {
 
   });
 
+  describe("RGB vaidation", function() {
+
+    it("Expect -5 to be changed to 0", function() {
+      var number = -5;
+      var final = validate_rgb_number(number);
+      expect(final).toEqual(0);
+    });
+
+    it("Expect 0 to be unchanged", function() {
+      var number = 0;
+      var final = validate_rgb_number(number);
+      expect(final).toEqual(0);
+    });
+
+    it("Expect 255 to be unchanged", function() {
+      var number = 255;
+      var final = validate_rgb_number(number);
+      expect(final).toEqual(255);
+    });
+
+    it("Expect 276 to be changed to 255", function() {
+      var number = 276;
+      var final = validate_rgb_number(number);
+      expect(final).toEqual(255);
+    });
+
+    it("Expect undefined, null or empty to string to be recorded as empty string in Store for UX purposes", function() {
+      expect(validate_rgb_number("")).toEqual("");
+      expect(validate_rgb_number(undefined)).toEqual("");
+      expect(validate_rgb_number(null)).toEqual("");
+    });
+
+  });
+
 });
