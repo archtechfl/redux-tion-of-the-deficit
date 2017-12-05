@@ -27,9 +27,6 @@ class ColorMixer extends React.Component {
         let parsedHexCode = parseHexCode(hexCode);
         this.props.triggerUpdateAllRGB(parsedHexCode);
         // Get the complete hex code
-        // TODO: figure out what to do with the fleshed out hex code in regards to state
-        // - Right now, if a hex code is incomplete, flesh it out in the app but do not update the state
-        // - Simply use it to get the correct color name for now
         let completeHexCode = generateHexString(parsedHexCode);
         // Update the color name
         this.props.fetchColorName(completeHexCode);
