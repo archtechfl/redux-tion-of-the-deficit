@@ -6,7 +6,13 @@ import appReducer from './store/reducers';
 import { triggerUpdateHex, triggerUpdateRGB, triggerUpdateAllRGB, getColorName } from './actions';
 import { Provider, connect } from 'react-redux';
 
-import { formatHexNumber, parseHexCode, generateHexString, validate_rgb_number } from './utils';
+import {
+    formatHexNumber,
+    parseHexCode,
+    generateHexString,
+    validate_rgb_number,
+    validateHexCode
+} from './utils';
 
 class ColorMixer extends React.Component {
 
@@ -21,8 +27,10 @@ class ColorMixer extends React.Component {
     handleHexChange(event) {
         // Fires when the hex code is changed
         let hexCode = event.target.value;
+        // Validate hex code
+        let validatedHexCode = validateHexCode(hexCode);
         // Call action for update hex code
-        this.props.triggerUpdateHex(hexCode);
+        this.props.triggerUpdateHex(validatedHexCode);
         // Take the hex code and update the RGB values
         let parsedHexCode = parseHexCode(hexCode);
         this.props.triggerUpdateAllRGB(parsedHexCode);
