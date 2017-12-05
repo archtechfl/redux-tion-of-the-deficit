@@ -1,25 +1,3 @@
-function convertRGBtoHex(red, green, blue, name, number) {
-    // Converts the RGB combination to a hex code
-    // If user deletes the RGB value in the interface, assume "0" for logic but store empty string
-    // - If zero is then stored in the state, field will never be blank, bad UX
-    if (number === null || number === undefined || number === "") {
-        number = 0;
-    }
-    let rgbValues = {
-        red: red,
-        green: green,
-        blue: blue,
-        [name]: parseInt(number)
-    };
-    let hexValues = {
-        red: formatHexNumber(rgbValues.red),
-        green: formatHexNumber(rgbValues.green),
-        blue: formatHexNumber(rgbValues.blue)
-    }
-    let hexString = `${hexValues.red}${hexValues.green}${hexValues.blue}`;
-    return hexString;
-}
-
 function formatHexNumber(number) {
     // Convert the RGB number to a hex number
     let hex = "";
@@ -70,4 +48,4 @@ function generateHexString(rgb) {
     return hexString;
 }
 
-export { convertRGBtoHex, formatHexNumber, parseHexCode, generateHexString };
+export { formatHexNumber, parseHexCode, generateHexString };
