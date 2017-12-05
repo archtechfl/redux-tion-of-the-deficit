@@ -184,4 +184,38 @@ describe("Utils", function() {
 
   });
 
+  describe("Hex formatting", function() {
+
+    it("Expect 0 to be encoded as 00 in hex", function() {
+      var number = 0;
+      var hex = formatHexNumber(number);
+      expect(hex).toEqual("00");
+    });
+
+    it("Expect 15 to be encoded as 0f in hex", function() {
+      var number = 15;
+      var hex = formatHexNumber(number);
+      expect(hex).toEqual("0f");
+    });
+
+    it("Expect 9 to be encoded as 0f in hex", function() {
+      var number = 9;
+      var hex = formatHexNumber(number);
+      expect(hex).toEqual("09");
+    });
+
+    it("Expect 16 to be encoded as 10 in hex", function() {
+      var number = 16;
+      var hex = formatHexNumber(number);
+      expect(hex).toEqual("10");
+    });
+
+    it("Expect 255 to be encoded as ff in hex", function() {
+      var number = 255;
+      var hex = formatHexNumber(number);
+      expect(hex).toEqual("ff");
+    });
+
+  });
+
 });
