@@ -19,7 +19,7 @@ function parseHexCode(code) {
     let red = parseInt(code.substring(0, 2), 16);
     let green = parseInt(code.substring(2, 4), 16);
     let blue = parseInt(code.substring(4, 6), 16);
-    // Sanity logic in the event that the hex code string is not complete
+    // Sanity logic in the event that the hex code string is not complete or out of range
     if (isNaN(green)){
         green = 0;
     };
@@ -40,9 +40,9 @@ function parseHexCode(code) {
 function generateHexString(rgb) {
     // Purpose: take a dictionary of RGB values and convert to hex string
     let hexValues = {
-        red: formatHexNumber(rgb.red),
-        green: formatHexNumber(rgb.green),
-        blue: formatHexNumber(rgb.blue)
+        red: formatHexNumber(validate_rgb_number(rgb.red)),
+        green: formatHexNumber(validate_rgb_number(rgb.green)),
+        blue: formatHexNumber(validate_rgb_number(rgb.blue))
     }
     let hexString = `${hexValues.red}${hexValues.green}${hexValues.blue}`;
     return hexString;
