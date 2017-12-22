@@ -268,7 +268,7 @@ describe("Utils", function() {
       expect(hex).toEqual("0f");
     });
 
-    it("Expect 9 to be encoded as 0f in hex", function() {
+    it("Expect 9 to be encoded as 09 in hex", function() {
       var number = 9;
       var hex = formatHexNumber(number);
       expect(hex).toEqual("09");
