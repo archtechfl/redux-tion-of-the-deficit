@@ -40,6 +40,76 @@ describe("Utils", function() {
       expect(hexString).toEqual("000000");
     });
 
+    it("RGB dict (255,255,0) should return hex of 'ffff00'", function() {
+      var rgb = {
+        red: 255,
+        green: 255,
+        blue: 0
+      };
+      var hexString = generateHexString(rgb);
+      expect(hexString).toEqual("ffff00");
+    });
+
+    it("RGB dict (255,0,0) should return hex of 'ff0000'", function() {
+      var rgb = {
+        red: 255,
+        green: 0,
+        blue: 0
+      };
+      var hexString = generateHexString(rgb);
+      expect(hexString).toEqual("ff0000");
+    });
+
+    it("RGB dict (0,255,0) should return hex of '00ff00'", function() {
+      var rgb = {
+        red: 0,
+        green: 255,
+        blue: 0
+      };
+      var hexString = generateHexString(rgb);
+      expect(hexString).toEqual("00ff00");
+    });
+
+    it("RGB dict (0,0,255) should return hex of '0000ff'", function() {
+      var rgb = {
+        red: 0,
+        green: 0,
+        blue: 255
+      };
+      var hexString = generateHexString(rgb);
+      expect(hexString).toEqual("0000ff");
+    });
+
+    it("RGB dict (0,255,255) should return hex of '00ffff'", function() {
+      var rgb = {
+        red: 0,
+        green: 255,
+        blue: 255
+      };
+      var hexString = generateHexString(rgb);
+      expect(hexString).toEqual("00ffff");
+    });
+
+    it("RGB dict (9,9,9) should return hex of '090909'", function() {
+      var rgb = {
+        red: 9,
+        green: 9,
+        blue: 9
+      };
+      var hexString = generateHexString(rgb);
+      expect(hexString).toEqual("090909");
+    });
+
+    it("RGB dict (10,10,10) should return hex of '0A0A0A'", function() {
+      var rgb = {
+        red: 10,
+        green: 10,
+        blue: 10
+      };
+      var hexString = generateHexString(rgb);
+      expect(hexString).toEqual("0a0a0a");
+    });
+
   });
 
   describe("Hex to RGB conversions", function() {
